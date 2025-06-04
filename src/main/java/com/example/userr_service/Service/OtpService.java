@@ -1,12 +1,6 @@
 package com.example.userr_service.Service;
 
-import com.example.userr_service.DTO.OtpData;
-import com.example.userr_service.DTO.Userr;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 @Service
 public class OtpService {

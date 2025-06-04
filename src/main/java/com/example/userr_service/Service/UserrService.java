@@ -1,10 +1,9 @@
 package com.example.userr_service.Service;
 
-import com.example.userr_service.DTO.Userr;
+import com.example.userr_service.Model.Userr;
 import com.example.userr_service.DTO.UserrDto;
 import com.example.userr_service.Repo.UserrRepo;
 import jakarta.transaction.Transactional;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +52,18 @@ public class UserrService {
 
     public void delete(Long id){
         userrRepo.findById(id).ifPresent(user -> userrRepo.delete(user));
+    }
+
+    public UserrDto findByUsername(String username){
+        Userr user = userrRepo.findByUsername(username);
+        UserrDto userrDto = new UserrDto();
+        userrDto.setUsername(user.getUsername());
+        userrDto.setPassword(user.getPassword());
+        userrDto.setEmailVerified(user.isEmailVerified());
+        userrDto.setNotificationEnabled(user.isNotificationEnabled());
+        userrDto.setRole(user.getRole());
+        userrDto.setUpdatedDate(LocalDateTime.now());
+
+        return userrDto;
     }
 }
